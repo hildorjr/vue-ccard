@@ -1,114 +1,119 @@
 <template>
   <div class="vue-c-card">
-        <div class="credit-card" :class="{'flip-cc': isTypingCvc, 'amex-cc': brand == 'amex', 'diners-cc': brand == 'diners', 'mastercard-cc': brand == 'mastercard', 'visa-cc': brand == 'visa', 'elo-cc': brand == 'elo', 'hipercard-cc': brand == 'hipercard', 'aura-cc': brand == 'aura', 'discover-cc': brand == 'discover', 'jcb-cc': brand == 'jcb'}">
-            <div class="front">
-                <img class="card-brand" v-if="brand == 'amex'" src="/assets/cc-brands/amex.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'diners'" src="/assets/cc-brands/diners.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'mastercard'" src="/assets/cc-brands/mastercard.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'visa'" src="/assets/cc-brands/visa.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'aura'" src="/assets/cc-brands/aura.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'hipercard'" src="/assets/cc-brands/hipercard.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'discover'" src="/assets/cc-brands/discover.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'elo'" src="/assets/cc-brands/elo.svg" alt="Brand">
-                <img class="card-brand" v-if="brand == 'jcb'" src="/assets/cc-brands/jcb.svg" alt="Brand">
-                <img class="card-brand" v-if="!['amex', 'diners', 'mastercard', 'visa', 'aura', 'hipercard', 'discover', 'elo', 'jcb'].includes(brand) && number.length < 18" src="/assets/cc-brands/generic02.svg" alt="Brand">
-                <img class="card-brand" v-if="!['amex', 'diners', 'mastercard', 'visa', 'aura', 'hipercard', 'discover', 'elo', 'jcb'].includes(brand) && number.length >= 18" src="/assets/cc-brands/generic01.svg" alt="Brand">
-                <p class="card-number">{{ number.length > 0 ? number : '•••• •••• •••• ••••' }}</p>
-                <p class="card-holder">{{ holder.length > 0 ? holder : 'João da Silva' }}</p>
-                <p class="card-exp">{{ exp.length > 0 ? exp : '••/••' }}</p>
-            </div>
-            <div class="back">
-                <p class="card-cvc">{{ cvc.length > 0 ? cvc : '•••' }}</p>
-            </div>
-        </div>
+    <div class="credit-card"
+      :class="{
+        'flip-cc': isTypingCvc,
+        'amex-cc': brand === 'amex',
+        'diners-cc': brand === 'diners',
+        'mastercard-cc': brand === 'mastercard',
+        'visa-cc': brand === 'visa',
+        'elo-cc': brand === 'elo',
+        'hipercard-cc': brand === 'hipercard',
+        'aura-cc': brand === 'aura',
+        'discover-cc': brand === 'discover',
+        'jcb-cc': brand === 'jcb'}">
+      <div class="front">
+        <template v-for="b in brands">
+          <img class="card-brand" :key="b"
+            v-show="b === brand"
+            :src="brandImgPath(b)" :alt="b">
+        </template>
+        <img class="card-brand"
+          v-if="!brands.includes(brand) && number.length < 18"
+          :src="brandImgPath('generic02')" alt="Brand">
+        <img class="card-brand"
+          v-if="!brands.includes(brand) && number.length >= 18"
+          :src="brandImgPath('generic01')" alt="Brand">
+        <p class="card-number">{{ number.length > 0 ? number : '•••• •••• •••• ••••' }}</p>
+        <p class="card-holder">{{ holder.length > 0 ? holder : 'João da Silva' }}</p>
+        <p class="card-exp">{{ exp.length > 0 ? exp : '••/••' }}</p>
+      </div>
+      <div class="back">
+          <p class="card-cvc">{{ cvc.length > 0 ? cvc : '•••' }}</p>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "VueCCard",
+  name: 'VueCCard',
   props: {
     number: String,
     holder: String,
     exp: String,
     cvc: String,
-    isTypingCvc: Boolean
+    isTypingCvc: Boolean,
   },
   data() {
     return {
-      brand: ""
+      brand: '',
+      brands: ['amex', 'diners', 'mastercard', 'visa', 'aura', 'hipercard', 'discover', 'elo', 'jcb'],
     };
   },
   watch: {
     number(newValue) {
       this.setCardFlag(newValue);
-    }
+    },
   },
   methods: {
+    brandImgPath(file) {
+      const images = require.context('./assets/cc-brands/', false, /\.svg$/);
+      return images(`./${file}.svg`);
+    },
     setCardFlag(cardNumber) {
-      let cNumber = cardNumber.replace(/\s/g, "");
+      const cNumber = cardNumber.replace(/\s/g, '');
       if (
-        cNumber.slice(0, 3) == "301" ||
-        cNumber.slice(0, 3) == "305" ||
-        cNumber.slice(0, 2) == "36" ||
-        cNumber.slice(0, 2) == "38"
+        cNumber.slice(0, 3) === '301'
+        || cNumber.slice(0, 3) === '305'
+        || cNumber.slice(0, 2) === '36'
+        || cNumber.slice(0, 2) === '38'
       ) {
-        this.brand = "diners";
+        this.brand = 'diners';
       } else if (
         [
-          "636368",
-          "438935",
-          "504175",
-          "451416",
-          "509048",
-          "509067",
-          "509049",
-          "509069",
-          "509050",
-          "509074",
-          "509068",
-          "509040",
-          "509045",
-          "509051",
-          "509046",
-          "509066",
-          "509047",
-          "509042",
-          "509052",
-          "509043",
-          "509064",
-          "509040"
+          '636368', '438935',
+          '504175', '451416',
+          '509048', '509067',
+          '509049', '509069',
+          '509050', '509074',
+          '509068', '509040',
+          '509045', '509051',
+          '509046', '509066',
+          '509047', '509042',
+          '509052', '509043',
+          '509064', '509040',
         ].includes(cNumber.slice(0, 6))
       ) {
-        this.brand = "elo";
-      } else if (["5067", "4576", "4011"].includes(cNumber.slice(0, 4))) {
-        this.brand = "elo";
-      } else if (cNumber.slice(0, 5) == "36297") {
-        this.brand = "elo";
-      } else if (cNumber.slice(0, 2) == "34" || cNumber.slice(0, 2) == "37") {
-        this.brand = "amex";
+        this.brand = 'elo';
+      } else if (['5067', '4576', '4011'].includes(cNumber.slice(0, 4))) {
+        this.brand = 'elo';
+      } else if (cNumber.slice(0, 5) === '36297') {
+        this.brand = 'elo';
+      } else if (cNumber.slice(0, 2) === '34' || cNumber.slice(0, 2) === '37') {
+        this.brand = 'amex';
       } else if (
-        cNumber.slice(0, 2) == "64" ||
-        cNumber.slice(0, 2) == "65" ||
-        cNumber.slice(0, 4) == "6011" ||
-        cNumber.slice(0, 3) == "622"
+        cNumber.slice(0, 2) === '64'
+        || cNumber.slice(0, 2) === '65'
+        || cNumber.slice(0, 4) === '6011'
+        || cNumber.slice(0, 3) === '622'
       ) {
-        this.brand = "discover";
-      } else if (cNumber.slice(0, 2) == "50") {
-        this.brand = "aura";
-      } else if (cNumber.slice(0, 2) == "35") {
-        this.brand = "jcb";
-      } else if (cNumber.slice(0, 2) == "38" || cNumber.slice(0, 2) == "60") {
-        this.brand = "hipercard";
-      } else if (cNumber.slice(0, 1) == "4") {
-        this.brand = "visa";
-      } else if (cNumber.slice(0, 1) == "5") {
-        this.brand = "mastercard";
+        this.brand = 'discover';
+      } else if (cNumber.slice(0, 2) === '50') {
+        this.brand = 'aura';
+      } else if (cNumber.slice(0, 2) === '35') {
+        this.brand = 'jcb';
+      } else if (cNumber.slice(0, 2) === '38' || cNumber.slice(0, 2) === '60') {
+        this.brand = 'hipercard';
+      } else if (cNumber.slice(0, 1) === '4') {
+        this.brand = 'visa';
+      } else if (cNumber.slice(0, 1) === '5') {
+        this.brand = 'mastercard';
       } else {
-        this.brand = "?";
+        this.brand = '?';
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -122,7 +127,7 @@ export default {
     height: 200px;
     @media (max-width: 450px) {
       width: 100%;
-      height: 180px;
+      height: 200px;
     }
   }
   .credit-card {
@@ -132,7 +137,7 @@ export default {
     box-shadow: 1px 1px 8px #333;
     text-shadow: 1px 1px 0px #333;
     margin-bottom: 20px;
-    transition: 0.5s;
+    transition: transform 0.5s;
     position: relative;
     transform-style: preserve-3d;
     text-align: left;
@@ -208,6 +213,7 @@ export default {
       height: 23px;
       text-overflow: ellipsis;
       overflow-x: hidden;
+      white-space: nowrap;
     }
     .card-holder {
       letter-spacing: 1px;
@@ -236,12 +242,9 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       width: 50px;
-      &::before {
-        content: "";
-        width: 200px;
-        height: 40px;
-        background: #999;
-      }
+      padding: 10px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.1);
     }
   }
 }
