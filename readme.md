@@ -30,7 +30,6 @@ Here is a example of vue-ccard in action:
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
 - [Issues](#issues)
   - [🐛 Bugs](#-bugs)
