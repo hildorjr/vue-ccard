@@ -1,8 +1,6 @@
-<div align="center">
-<h1>vue-ccard</h1>
+# vue-ccard
 
-<p>A Vue.js component that displays a reactive credit card preview for payment forms.</p>
-</div>
+A Vue.js component that displays a reactive credit card preview for payment forms.
 
 ---
 
@@ -10,7 +8,6 @@
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npmtrends]
 [![MIT License][license-badge]][license]
-
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome][prs-badge]][prs]
 <!-- prettier-ignore-end -->
