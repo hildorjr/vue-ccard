@@ -7,6 +7,8 @@ A Vue.js component that displays a reactive credit card preview for payment form
 <!-- prettier-ignore-start -->
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npmtrends]
+[![total downloads][total-downloads-badge]][package]
+[![lgtm][lgtm-badge]][lgtm]
 [![MIT License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome][prs-badge]][prs]
@@ -161,6 +163,9 @@ MIT
 [version-badge]: https://img.shields.io/npm/v/vue-ccard.svg?style=flat-square
 [package]: https://www.npmjs.com/package/vue-ccard
 [downloads-badge]: https://img.shields.io/npm/dm/vue-ccard.svg?style=flat-square
+[total-downloads-badge]: https://img.shields.io/npm/dt/vue-ccard.svg?color=red&label=total%20downloads
+[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/github/hildorjr/vue-ccard.svg?logo=lgtm&logoWidth=18
+[lgtm]: https://lgtm.com/projects/g/hildorjr/vue-ccard
 [npmtrends]: http://www.npmtrends.com/vue-ccard
 [license-badge]: https://img.shields.io/npm/l/vue-ccard.svg?style=flat-square
 [license]: https://github.com/hildorjr/vue-ccard/blob/master/LICENSE
