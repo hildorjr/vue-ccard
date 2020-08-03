@@ -14,9 +14,9 @@ export const dinersNumbers2d = ['36', '38'];
 
 export const amexNumbers2d = ['34', '37'];
 
-export const discoverNumbers2d = ['64', '65'];
-export const discoverNumbers3d = ['622'];
 export const discoverNumbers4d = ['6011'];
+export const discoverNumbers3d = ['622'];
+export const discoverNumbers2d = ['64', '65'];
 
 export const auraNumbers2d = ['50'];
 
@@ -26,4 +26,4 @@ export const hipercardNumbers2d = ['38', '60'];
 
 export const visaNumbers1d = ['4'];
 
-export const masterNumbers1d = ['4'];
+export const masterNumbers1d = ['5'];

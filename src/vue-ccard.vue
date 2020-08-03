@@ -66,55 +66,46 @@ export default {
     setCardFlag(cardNumber) {
       const cNumber = cardNumber.replace(/\s/g, '');
       if (
-           cts.dinersNumbers3d.includes(cNumber.slice(0, 3))
-        || cts.dinersNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'diners';
-
-      } else if (
-           cts.eloNumbers6d.includes(cNumber.slice(0, 6))
-        || cts.eloNumbers4d.includes(cNumber.slice(0, 4))
+        cts.eloNumbers6d.includes(cNumber.slice(0, 6))
+        || cts.eloNumbers5d.includes(cNumber.slice(0, 5))
         || cts.eloNumbers4d.includes(cNumber.slice(0, 4))
       ) {
         this.brand = 'elo';
-
+      } else if (
+        cts.discoverNumbers4d.includes(cNumber.slice(0, 4))
+        || cts.discoverNumbers3d.includes(cNumber.slice(0, 3))
+        || cts.discoverNumbers2d.includes(cNumber.slice(0, 2))
+      ) {
+        this.brand = 'discover';
+      } else if (
+        cts.dinersNumbers3d.includes(cNumber.slice(0, 3))
+        || cts.dinersNumbers2d.includes(cNumber.slice(0, 2))
+      ) {
+        this.brand = 'diners';
       } else if (
         cts.amexNumbers2d.includes(cNumber.slice(0, 2))
       ) {
         this.brand = 'amex';
-
-      } else if (
-           cts.discoverNumbers2d.includes(cNumber.slice(0, 2))
-        || cts.discoverNumbers3d.includes(cNumber.slice(0, 3))
-        || cts.discoverNumbers4d.includes(cNumber.slice(0, 4))
-      ) {
-        this.brand = 'discover';
-
       } else if (
         cts.auraNumbers2d.includes(cNumber.slice(0, 2))
       ) {
         this.brand = 'aura';
-
       } else if (
         cts.jcbNumbers2d.includes(cNumber.slice(0, 2))
       ) {
         this.brand = 'jcb';
-
       } else if (
         cts.hipercardNumbers2d.includes(cNumber.slice(0, 2))
       ) {
         this.brand = 'hipercard';
-
       } else if (
         cts.visaNumbers1d.includes(cNumber.slice(0, 1))
       ) {
         this.brand = 'visa';
-
       } else if (
         cts.masterNumbers1d.includes(cNumber.slice(0, 1))
       ) {
         this.brand = 'mastercard';
-
       } else {
         this.brand = '?';
       }

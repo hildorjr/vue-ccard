@@ -1,6 +1,6 @@
 {
   "name": "vue-ccard",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "A Vue.js component that displays a reactive credit card preview for payment forms.",
   "main": "dist/vue-ccard.umd.js",
   "module": "dist/vue-ccard.esm.js",
