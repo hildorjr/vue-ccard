@@ -7,6 +7,9 @@ A Vue.js component that displays a reactive credit card preview for payment form
 <!-- prettier-ignore-start -->
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npmtrends]
+[![size][size-badge]][package]
+[![total downloads][total-downloads-badge]][package]
+[![lgtm][lgtm-badge]][lgtm]
 [![MIT License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 [![PRs Welcome][prs-badge]][prs]
@@ -158,9 +161,13 @@ MIT
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
+[size-badge]: https://img.shields.io/github/repo-size/hildorjr/vue-ccard?style=flat-square
 [version-badge]: https://img.shields.io/npm/v/vue-ccard.svg?style=flat-square
 [package]: https://www.npmjs.com/package/vue-ccard
 [downloads-badge]: https://img.shields.io/npm/dm/vue-ccard.svg?style=flat-square
+[total-downloads-badge]: https://img.shields.io/npm/dt/vue-ccard.svg?color=red&label=total%20downloads&style=flat-square
+[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/github/hildorjr/vue-ccard.svg?logo=lgtm&logoWidth=18&style=flat-square
+[lgtm]: https://lgtm.com/projects/g/hildorjr/vue-ccard
 [npmtrends]: http://www.npmtrends.com/vue-ccard
 [license-badge]: https://img.shields.io/npm/l/vue-ccard.svg?style=flat-square
 [license]: https://github.com/hildorjr/vue-ccard/blob/master/LICENSE
