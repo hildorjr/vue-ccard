@@ -1,0 +1,130 @@
+.vue-c-card {
+  perspective: 800px;
+  .credit-card,
+  .front,
+  .back {
+    width: 400px;
+    height: 200px;
+    @media (max-width: 450px) {
+      width: 100%;
+      height: 200px;
+    }
+  }
+  .credit-card {
+    background: #bdbdbd;
+    color: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 1px 8px #333;
+    text-shadow: 1px 1px 0px #333;
+    margin-bottom: 20px;
+    transition: transform 0.5s;
+    position: relative;
+    transform-style: preserve-3d;
+    text-align: left;
+    &.flip-cc {
+      transform: rotateY(180deg);
+    }
+    &.visa-cc {
+      background: #7598c1;
+    }
+    &.mastercard-cc {
+      background: #e4854b;
+    }
+    &.diners-cc {
+      background: #0078bf;
+    }
+    &.amex-cc {
+      background: #6f93c5;
+    }
+    &.elo-cc {
+      background: #1aa1d8;
+    }
+    &.discover-cc {
+      background: #c77547;
+    }
+    &.aura-cc {
+      background: #918db9;
+    }
+    &.hipercard-cc {
+      background: #88404e;
+    }
+    &.jcb-cc {
+      background: #2d8f48;
+    }
+    .front,
+    .back {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .front {
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+    .back {
+      transform: rotateY(-180deg);
+    }
+    .card-number,
+    .card-holder,
+    .card-exp,
+    .card-cvc {
+      font-family: monospace;
+      letter-spacing: 1px;
+      font-size: 18px;
+      position: absolute;
+      font-weight: 600;
+      @media (max-width: 450px) {
+        font-size: 14px !important;
+      }
+    }
+    .card-brand {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      height: 50px;
+    }
+    .card-number {
+      font-size: 21px;
+      letter-spacing: 5px;
+      top: 80px;
+      left: 35px;
+      width: 350px;
+      height: 23px;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      white-space: nowrap;
+    }
+    .card-holder {
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      width: 240px;
+      height: 45px;
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      top: 120px;
+      left: 35px;
+      @media (max-width: 500px) {
+        width: 60%;
+        height: 45px;
+      }
+    }
+    .card-exp {
+      top: 120px;
+      right: 35px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 60px;
+    }
+    .card-cvc {
+      top: 90px;
+      right: 35px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 50px;
+      padding: 10px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
