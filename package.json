@@ -5,6 +5,13 @@
   "main": "dist/vue-ccard.umd.js",
   "module": "dist/vue-ccard.esm.js",
   "unpkg": "dist/vue-ccard.min.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-ccard.esm.js",
+      "require": "./dist/vue-ccard.umd.js"
+    },
+    "./sfc": "./src/vue-ccard.vue"
+  },
   "author": "Hildor Junior",
   "license": "MIT",
   "private": false,
@@ -24,21 +31,20 @@
     "*.json",
     "*.js"
   ],
+  "peerDependencies": {
+    "vue": "^2.6.0 || ^3.0.0"
+  },
   "dependencies": {},
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "@vue/eslint-config-prettier": "^3.0.0-rc.3",
-    "node-sass": "^7.0.0",
-    "rollup": "^1.17.0",
-    "rollup-plugin-buble": "^0.19.8",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-vue": "^6.0.0",
-    "sass-loader": "^7.0.3",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10",
-    "webpack-cli": "^3.0.8"
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@rollup/plugin-vue": "^9.0.0",
+    "rollup": "^4.0.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "vue": "^3.3.0"
   },
   "eslintConfig": {
     "root": true,
@@ -63,5 +69,17 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+          }
+        }
+      ]
+    ]
+  }
 }

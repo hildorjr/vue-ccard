@@ -13,8 +13,8 @@
         'discover-cc': brand === 'discover',
         'jcb-cc': brand === 'jcb'}">
       <div class="front">
-        <template v-for="b in brands">
-          <img class="card-brand" :key="b"
+        <template v-for="b in brands" :key="b">
+          <img class="card-brand"
             v-show="b === brand"
             :src="brandImgPath(b)" :alt="b">
         </template>
@@ -37,6 +37,31 @@
 
 <script>
 import * as cts from './constants';
+import amexSvg from './assets/cc-brands/amex.svg';
+import auraSvg from './assets/cc-brands/aura.svg';
+import dinersSvg from './assets/cc-brands/diners.svg';
+import discoverSvg from './assets/cc-brands/discover.svg';
+import eloSvg from './assets/cc-brands/elo.svg';
+import generic01Svg from './assets/cc-brands/generic01.svg';
+import generic02Svg from './assets/cc-brands/generic02.svg';
+import hipercardSvg from './assets/cc-brands/hipercard.svg';
+import jcbSvg from './assets/cc-brands/jcb.svg';
+import mastercardSvg from './assets/cc-brands/mastercard.svg';
+import visaSvg from './assets/cc-brands/visa.svg';
+
+const brandImages = {
+  amex: amexSvg,
+  aura: auraSvg,
+  diners: dinersSvg,
+  discover: discoverSvg,
+  elo: eloSvg,
+  generic01: generic01Svg,
+  generic02: generic02Svg,
+  hipercard: hipercardSvg,
+  jcb: jcbSvg,
+  mastercard: mastercardSvg,
+  visa: visaSvg,
+};
 
 export default {
   name: 'VueCCard',
@@ -60,58 +85,30 @@ export default {
   },
   methods: {
     brandImgPath(file) {
-      const images = require.context('./assets/cc-brands/', false, /\.svg$/);
-      return images(`./${file}.svg`);
+      return brandImages[file] || brandImages.generic02;
     },
     setCardFlag(cardNumber) {
       const cNumber = cardNumber.replace(/\s/g, '');
-      if (
-        cts.eloNumbers6d.includes(cNumber.slice(0, 6))
-        || cts.eloNumbers5d.includes(cNumber.slice(0, 5))
-        || cts.eloNumbers4d.includes(cNumber.slice(0, 4))
-      ) {
-        this.brand = 'elo';
-      } else if (
-        cts.discoverNumbers4d.includes(cNumber.slice(0, 4))
-        || cts.discoverNumbers3d.includes(cNumber.slice(0, 3))
-        || cts.discoverNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'discover';
-      } else if (
-        cts.dinersNumbers3d.includes(cNumber.slice(0, 3))
-        || cts.dinersNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'diners';
-      } else if (
-        cts.amexNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'amex';
-      } else if (
-        cts.auraNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'aura';
-      } else if (
-        cts.jcbNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'jcb';
-      } else if (
-        cts.hipercardNumbers2d.includes(cNumber.slice(0, 2))
-      ) {
-        this.brand = 'hipercard';
-      } else if (
-        cts.visaNumbers1d.includes(cNumber.slice(0, 1))
-      ) {
-        this.brand = 'visa';
-      } else if (
-        cts.masterNumbers1d.includes(cNumber.slice(0, 1))
-      ) {
-        this.brand = 'mastercard';
-      } else {
+      
+      if (!cNumber) {
         this.brand = '?';
+        return;
       }
+
+      for (const rule of cts.cardBrandRules) {
+        if (cNumber.length >= rule.length) {
+          const prefix = cNumber.slice(0, rule.length);
+          if (rule.prefixes.has(prefix)) {
+            this.brand = rule.brand;
+            return;
+          }
+        }
+      }
+
+      this.brand = '?';
     },
   },
 };
 </script>
 
-<style src="./style.scss" lang="scss" scoped></style>
+<style src="./style.css" scoped></style>

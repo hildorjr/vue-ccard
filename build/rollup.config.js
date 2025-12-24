@@ -1,18 +1,25 @@
-import commonjs from 'rollup-plugin-commonjs'; // Converte módulos CommonJS para ES6
-import vue from 'rollup-plugin-vue'; // Manipula arquivos .vue
-import buble from 'rollup-plugin-buble'; // Transpila com considerável suporte a navegadores
+import commonjs from '@rollup/plugin-commonjs';
+import vue from '@rollup/plugin-vue';
+import { babel } from '@rollup/plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+
 export default {
-  input: 'src/wrapper.js', // Caminho relativo ao package.json
+  input: 'src/wrapper.js',
   output: {
     name: 'VueCCard',
     exports: 'named',
   },
   plugins: [
-    commonjs(),
+    nodeResolve(),
     vue({
-      css: true, // Dinamicamente injeta CSS como uma tag <style>
-      compileTemplate: true, // Explicitamente converte template para função render
+      css: true,
     }),
-    buble(), // Transpila para ES5
+    commonjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.js', '.vue'],
+    }),
   ],
+  external: ['vue'],
 };
