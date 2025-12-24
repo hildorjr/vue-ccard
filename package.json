@@ -50,9 +50,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
-    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-ccard.umd.js",
-    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-ccard.esm.js",
-    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-ccard.min.js",
+    "build:umd": "rollup --config build/rollup.config.mjs --format umd --file dist/vue-ccard.umd.js",
+    "build:es": "rollup --config build/rollup.config.mjs --format es --file dist/vue-ccard.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.mjs --format iife --file dist/vue-ccard.min.js",
     "demo": "npm --prefix demo run dev",
     "demo:build": "npm --prefix demo run build"
   },
@@ -60,14 +60,16 @@
     "vue": "^2.6.0 || ^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.23.0",
-    "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^25.0.0",
-    "@rollup/plugin-node-resolve": "^15.2.0",
-    "@rollup/plugin-vue": "^9.0.0",
-    "rollup": "^4.0.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-url": "^8.0.2",
+    "postcss-nested": "^7.0.2",
+    "rollup": "^4.28.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "vue": "^3.3.0"
+    "rollup-plugin-vue": "^6.0.0",
+    "vue": "^3.5.0"
   }
 }
