@@ -7,7 +7,9 @@ A reactive credit card component for Vue 2 & 3 with TypeScript support.
 [![bundle size](https://img.shields.io/bundlephobia/minzip/vue-ccard?style=flat-square)](https://bundlephobia.com/package/vue-ccard)
 [![license](https://img.shields.io/npm/l/vue-ccard.svg?style=flat-square)](https://github.com/hildorjr/vue-ccard/blob/master/LICENSE)
 
-![vue-ccard demo](https://media3.giphy.com/media/JTgJcgmk7nznxpO8X5/giphy.gif)
+<p align="center">
+  <a href="https://hildorjr.github.io/vue-ccard"><strong>View Live Demo →</strong></a>
+</p>
 
 ## Features
 
@@ -15,11 +17,8 @@ A reactive credit card component for Vue 2 & 3 with TypeScript support.
 - TypeScript support
 - Auto-detects card brand from number
 - Flip animation when typing CVC
+- Responsive sizing with real credit card aspect ratio
 - Supports Visa, Mastercard, Amex, Discover, JCB, Diners, Elo, Hipercard, Aura
-
-## Demo
-
-[Live Demo](https://hildorjr.github.io/vue-ccard)
 
 ## Installation
 
@@ -37,6 +36,7 @@ npm install vue-ccard
     :exp="card.exp"
     :cvc="card.cvc"
     :is-typing-cvc="isTypingCvc"
+    :width="400"
   />
 
   <input v-model="card.number" placeholder="Card number">
@@ -96,7 +96,24 @@ const card = reactive({
 | `exp` | `String` | `''` | Expiration date (MM/YY) |
 | `cvc` | `String` | `''` | Security code |
 | `is-typing-cvc` | `Boolean` | `false` | When true, flips the card to show the back |
-| `width` | `Number \| String` | `350` | Card width in pixels (height auto-scales to maintain credit card ratio) |
+| `width` | `Number \| String` | `350` | Card width - accepts pixels or CSS units |
+
+## Responsive Sizing
+
+The card maintains real credit card proportions (85.6mm × 53.98mm). Set the `width` prop to control the size:
+
+```vue
+<!-- Fixed pixel width -->
+<VueCCard :width="400" />
+
+<!-- Responsive width -->
+<VueCCard width="100%" />
+
+<!-- Using CSS units -->
+<VueCCard width="25rem" />
+```
+
+All text, icons, and spacing scale proportionally with the card size.
 
 ## Supported Card Brands
 
