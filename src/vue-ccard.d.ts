@@ -18,6 +18,7 @@ export interface VueCCardProps {
   exp?: string;
   cvc?: string;
   isTypingCvc?: boolean;
+  width?: number | string;
 }
 
 declare const VueCCard: DefineComponent<VueCCardProps>;

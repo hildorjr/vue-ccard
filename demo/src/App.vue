@@ -17,7 +17,20 @@
           :exp="card.exp"
           :cvc="card.cvc"
           :is-typing-cvc="isTypingCvc"
+          :width="cardWidth"
         />
+      </section>
+
+      <section class="size-control">
+        <label for="width">Card Width: {{ cardWidth }}px</label>
+        <input
+          id="width"
+          v-model.number="cardWidth"
+          type="range"
+          min="250"
+          max="450"
+          step="10"
+        >
       </section>
 
       <section class="form">
@@ -94,6 +107,7 @@
     :exp="cardExp"
     :cvc="cardCvc"
     :is-typing-cvc="isTypingCvc"
+    :width="400"
   /&gt;
 &lt;/template&gt;
 
@@ -149,6 +163,11 @@ export default {
               <td>Boolean</td>
               <td>Flips card to show back</td>
             </tr>
+            <tr>
+              <td><code>width</code></td>
+              <td>Number | String</td>
+              <td>Card width (default: 350px, maintains credit card aspect ratio)</td>
+            </tr>
           </tbody>
         </table>
 
@@ -172,6 +191,7 @@ export default {
   data() {
     return {
       isTypingCvc: false,
+      cardWidth: 350,
       card: {
         number: '',
         holder: '',
@@ -284,6 +304,56 @@ main {
 .preview {
   display: flex;
   justify-content: center;
+}
+
+.size-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    max-width: 300px;
+    height: 6px;
+    background: #2a2a4a;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      background: #667eea;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: #667eea;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .form {

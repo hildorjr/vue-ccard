@@ -96,6 +96,7 @@ const card = reactive({
 | `exp` | `String` | `''` | Expiration date (MM/YY) |
 | `cvc` | `String` | `''` | Security code |
 | `is-typing-cvc` | `Boolean` | `false` | When true, flips the card to show the back |
+| `width` | `Number \| String` | `350` | Card width in pixels (height auto-scales to maintain credit card ratio) |
 
 ## Supported Card Brands
 

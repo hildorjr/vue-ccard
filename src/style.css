@@ -1,56 +1,64 @@
 .vue-c-card {
+  --card-width: 350px;
+  --card-height: calc(var(--card-width) / 1.586);
+  --card-padding: calc(var(--card-width) * 0.0875);
+  --font-number: calc(var(--card-width) * 0.0525);
+  --font-text: calc(var(--card-width) * 0.045);
+  --font-small: calc(var(--card-width) * 0.04);
+  --brand-height: calc(var(--card-width) * 0.125);
+
   perspective: 800px;
+
   .credit-card,
   .front,
   .back {
-    width: 400px;
-    height: 200px;
-    @media (max-width: 450px) {
-      width: 100%;
-      height: 200px;
-    }
+    width: var(--card-width);
+    height: var(--card-height);
   }
+
   .credit-card {
     background: #bdbdbd;
     color: #fff;
-    border-radius: 6px;
-    box-shadow: 1px 1px 8px #333;
-    text-shadow: 1px 1px 0px #333;
-    margin-bottom: 20px;
+    border-radius: calc(var(--card-width) * 0.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
     transition: transform 0.5s;
     position: relative;
     transform-style: preserve-3d;
     text-align: left;
+
     &.flip-cc {
       transform: rotateY(180deg);
     }
+
     &.visa-cc {
-      background: #7598c1;
+      background: linear-gradient(135deg, #1a1f71 0%, #2b4acb 100%);
     }
     &.mastercard-cc {
-      background: #e4854b;
+      background: linear-gradient(135deg, #eb001b 0%, #f79e1b 100%);
     }
     &.diners-cc {
-      background: #0078bf;
+      background: linear-gradient(135deg, #004c97 0%, #0078bf 100%);
     }
     &.amex-cc {
-      background: #6f93c5;
+      background: linear-gradient(135deg, #006fcf 0%, #00a1e0 100%);
     }
     &.elo-cc {
-      background: #1aa1d8;
+      background: linear-gradient(135deg, #000 0%, #ffcb05 100%);
     }
     &.discover-cc {
-      background: #c77547;
+      background: linear-gradient(135deg, #ff6000 0%, #ffb84d 100%);
     }
     &.aura-cc {
-      background: #918db9;
+      background: linear-gradient(135deg, #6b5b95 0%, #918db9 100%);
     }
     &.hipercard-cc {
-      background: #88404e;
+      background: linear-gradient(135deg, #822124 0%, #b5232a 100%);
     }
     &.jcb-cc {
-      background: #2d8f48;
+      background: linear-gradient(135deg, #0b4ea2 0%, #098a5b 100%);
     }
+
     .front,
     .back {
       backface-visibility: hidden;
@@ -58,74 +66,70 @@
       top: 0;
       left: 0;
     }
+
     .front {
       z-index: 2;
       transform: rotateY(0deg);
     }
+
     .back {
       transform: rotateY(-180deg);
     }
+
     .card-number,
     .card-holder,
     .card-exp,
     .card-cvc {
-      font-family: monospace;
-      letter-spacing: 1px;
-      font-size: 18px;
+      font-family: 'Courier New', monospace;
       position: absolute;
       font-weight: 600;
-      @media (max-width: 450px) {
-        font-size: 14px !important;
-      }
+      margin: 0;
     }
+
     .card-brand {
       position: absolute;
-      top: 15px;
-      right: 35px;
-      height: 50px;
+      top: var(--card-padding);
+      right: var(--card-padding);
+      height: var(--brand-height);
+      width: auto;
     }
+
     .card-number {
-      font-size: 21px;
-      letter-spacing: 5px;
-      top: 80px;
-      left: 35px;
-      width: 350px;
-      height: 23px;
-      text-overflow: ellipsis;
-      overflow-x: hidden;
+      font-size: var(--font-number);
+      letter-spacing: calc(var(--card-width) * 0.008);
+      top: 45%;
+      left: var(--card-padding);
+      right: var(--card-padding);
+      overflow: hidden;
       white-space: nowrap;
+      text-overflow: ellipsis;
     }
+
     .card-holder {
-      letter-spacing: 1px;
+      font-size: var(--font-text);
+      letter-spacing: calc(var(--card-width) * 0.003);
       text-transform: uppercase;
-      width: 240px;
-      height: 45px;
+      bottom: var(--card-padding);
+      left: var(--card-padding);
+      max-width: 60%;
+      overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
-      overflow-x: hidden;
-      top: 120px;
-      left: 35px;
-      @media (max-width: 500px) {
-        width: 60%;
-        height: 45px;
-      }
     }
+
     .card-exp {
-      top: 120px;
-      right: 35px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 60px;
+      font-size: var(--font-text);
+      bottom: var(--card-padding);
+      right: var(--card-padding);
     }
+
     .card-cvc {
-      top: 90px;
-      right: 35px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 50px;
-      padding: 10px;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.1);
+      font-size: var(--font-number);
+      top: 45%;
+      right: var(--card-padding);
+      padding: calc(var(--card-width) * 0.02) calc(var(--card-width) * 0.03);
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: calc(var(--card-width) * 0.01);
     }
   }
 }
-

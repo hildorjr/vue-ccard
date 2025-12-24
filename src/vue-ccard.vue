@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-c-card">
+  <div class="vue-c-card" :style="cardStyle">
     <div class="credit-card" :class="cardClasses">
       <div class="front">
         <img class="card-brand" :src="brandImage" :alt="brand">
@@ -26,8 +26,13 @@ export default {
     exp: { type: String, default: '' },
     cvc: { type: String, default: '' },
     isTypingCvc: { type: Boolean, default: false },
+    width: { type: [Number, String], default: 350 },
   },
   computed: {
+    cardStyle() {
+      const w = typeof this.width === 'number' ? `${this.width}px` : this.width;
+      return { '--card-width': w };
+    },
     brand() {
       const digits = this.number.replace(/\s/g, '');
       if (!digits) return null;
