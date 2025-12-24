@@ -1,19 +1,28 @@
-// Importa o componente
 import component from './vue-ccard.vue';
 
-// Declara a função de instalação executada pelo Vue.use()
-export function install(Vue) {
-  if (install.installed) return;
-  install.installed = true;
-  Vue.component('VueCCard', component);
+function getVueVersion(vue) {
+  if (!vue || !vue.version) return null;
+  const major = parseInt(vue.version.split('.')[0], 10);
+  return major;
 }
 
-// Cria a definição do módulo para Vue.use()
+export function install(app) {
+  if (install.installed) return;
+  install.installed = true;
+
+  const vueVersion = getVueVersion(app);
+  
+  if (vueVersion !== 2 && vueVersion !== 3) {
+    throw new Error('vue-ccard requires Vue 2 or Vue 3');
+  }
+
+  app.component('VueCCard', component);
+}
+
 const plugin = {
   install,
 };
 
-// Auto-instala quando o Vue é encontrado (no navegador via <script>)
 let GlobalVue = null;
 if (typeof window !== 'undefined') {
   GlobalVue = window.Vue;
@@ -24,5 +33,4 @@ if (GlobalVue) {
   GlobalVue.use(plugin);
 }
 
-// Para permitir o uso como um módulo exportável (npm/webpack/etc.)
 export default component;
