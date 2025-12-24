@@ -2,22 +2,52 @@
   "name": "vue-ccard",
   "version": "1.1.0",
   "description": "A Vue.js component that displays a reactive credit card preview for payment forms.",
+  "keywords": [
+    "vue",
+    "vue3",
+    "vue2",
+    "credit-card",
+    "card",
+    "payment",
+    "form",
+    "component",
+    "reactive",
+    "preview",
+    "typescript"
+  ],
+  "homepage": "https://hildorjr.github.io/vue-ccard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hildorjr/vue-ccard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hildorjr/vue-ccard/issues"
+  },
+  "author": {
+    "name": "Hildor Junior",
+    "url": "https://hildor.dev"
+  },
+  "license": "MIT",
   "main": "dist/vue-ccard.umd.js",
   "module": "dist/vue-ccard.esm.js",
   "unpkg": "dist/vue-ccard.min.js",
+  "types": "src/vue-ccard.d.ts",
   "exports": {
     ".": {
+      "types": "./src/vue-ccard.d.ts",
       "import": "./dist/vue-ccard.esm.js",
       "require": "./dist/vue-ccard.umd.js"
     },
     "./sfc": "./src/vue-ccard.vue"
   },
-  "author": "Hildor Junior",
-  "license": "MIT",
-  "private": false,
   "browser": {
     "./sfc": "src/vue-ccard.vue"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-ccard.umd.js",
@@ -26,17 +56,9 @@
     "demo": "npm --prefix demo run dev",
     "demo:build": "npm --prefix demo run build"
   },
-  "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
-  ],
   "peerDependencies": {
     "vue": "^2.6.0 || ^3.0.0"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.23.0",
@@ -47,41 +69,5 @@
     "rollup": "^4.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "vue": "^3.3.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-          }
-        }
-      ]
-    ]
   }
 }

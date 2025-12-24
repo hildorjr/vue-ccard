@@ -1,94 +1,64 @@
 # vue-ccard
 
-A Vue.js component that displays a reactive credit card preview for payment forms.
+A reactive credit card component for Vue 2 & 3 with TypeScript support.
 
----
+[![npm version](https://img.shields.io/npm/v/vue-ccard.svg?style=flat-square)](https://www.npmjs.com/package/vue-ccard)
+[![npm downloads](https://img.shields.io/npm/dm/vue-ccard.svg?style=flat-square)](https://www.npmjs.com/package/vue-ccard)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/vue-ccard?style=flat-square)](https://bundlephobia.com/package/vue-ccard)
+[![license](https://img.shields.io/npm/l/vue-ccard.svg?style=flat-square)](https://github.com/hildorjr/vue-ccard/blob/master/LICENSE)
 
-<!-- prettier-ignore-start -->
-[![version][version-badge]][package]
-[![downloads][downloads-badge]][npmtrends]
-[![size][size-badge]][package]
-[![total downloads][total-downloads-badge]][package]
-[![lgtm][lgtm-badge]][lgtm]
-[![MIT License][license-badge]][license]
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-[![PRs Welcome][prs-badge]][prs]
-<!-- prettier-ignore-end -->
+![vue-ccard demo](https://media3.giphy.com/media/JTgJcgmk7nznxpO8X5/giphy.gif)
 
-## What is this?
+## Features
 
-This is a Vue.js component that renders a beautiful virtual credit card which is reactive to user input. The purpose is to enhance user experience in a online purchase situation.
+- Works with Vue 2 and Vue 3
+- TypeScript support
+- Auto-detects card brand from number
+- Flip animation when typing CVC
+- Supports Visa, Mastercard, Amex, Discover, JCB, Diners, Elo, Hipercard, Aura
 
-Here is a example of vue-ccard in action:
+## Demo
 
-![Working Example](https://media3.giphy.com/media/JTgJcgmk7nznxpO8X5/giphy.gif)
-
-## Table of contents
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Other Solutions](#other-solutions)
-- [Issues](#issues)
-  - [🐛 Bugs](#-bugs)
-  - [💡 Feature Requests](#-feature-requests)
-- [Contributors ✨](#contributors-)
-- [LICENSE](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+[Live Demo](https://hildorjr.github.io/vue-ccard)
 
 ## Installation
 
-This module is distributed via [npm][npm] which is bundled with [node][node] and
-should be installed as one of your project's `dependencies`:
-
-```
-npm install --save vue-ccard
+```bash
+npm install vue-ccard
 ```
 
 ## Usage
 
-Here is a basic example on how to implement this component:
-```
+```vue
 <template>
-  <div id="app">
-    <vue-c-card
-      :number="cc.number"
-      :holder="cc.holder"
-      :exp="cc.exp"
-      :cvc="cc.cvc"
-      :is-typing-cvc="isTypingCvc"/>
-    
-    <label for="number">Number</label>
-    <input type="text" v-model="cc.number" id="number">
+  <VueCCard
+    :number="card.number"
+    :holder="card.holder"
+    :exp="card.exp"
+    :cvc="card.cvc"
+    :is-typing-cvc="isTypingCvc"
+  />
 
-    <label for="holder">Holder</label>
-    <input type="text" v-model="cc.holder" id="holder">
-
-    <label for="exp">Expiration Date</label>
-    <input type="text" v-model="cc.exp" id="exp">
-
-    <label for="cvc">CVC</label>
-    <input type="text" v-model="cc.cvc"
-      @focus="isTypingCvc = true"
-      @blur="isTypingCvc = false" id="cvc">
-  </div>
+  <input v-model="card.number" placeholder="Card number">
+  <input v-model="card.holder" placeholder="Card holder">
+  <input v-model="card.exp" placeholder="MM/YY">
+  <input
+    v-model="card.cvc"
+    placeholder="CVC"
+    @focus="isTypingCvc = true"
+    @blur="isTypingCvc = false"
+  >
 </template>
 
 <script>
 import VueCCard from 'vue-ccard';
 
 export default {
-  name: 'app',
-  components: {
-    VueCCard,
-  },
+  components: { VueCCard },
   data() {
     return {
       isTypingCvc: false,
-      cc: {
+      card: {
         number: '',
         holder: '',
         exp: '',
@@ -100,82 +70,57 @@ export default {
 </script>
 ```
 
-## Other solutions
+### With TypeScript
 
-I'm not aware of any, if you are please [make a pull request][prs] and add it
-here!
+```vue
+<script setup lang="ts">
+import VueCCard from 'vue-ccard';
+import { ref, reactive } from 'vue';
 
-## Issues
+const isTypingCvc = ref(false);
+const card = reactive({
+  number: '',
+  holder: '',
+  exp: '',
+  cvc: '',
+});
+</script>
+```
 
-_Looking to contribute? Look for the [Good First Issue][good-first-issue]
-label._
+## Props
 
-### 🐛 Bugs
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `number` | `String` | `''` | Credit card number |
+| `holder` | `String` | `''` | Cardholder name |
+| `exp` | `String` | `''` | Expiration date (MM/YY) |
+| `cvc` | `String` | `''` | Security code |
+| `is-typing-cvc` | `Boolean` | `false` | When true, flips the card to show the back |
 
-Please file an issue for bugs, missing documentation, or unexpected behavior.
+## Supported Card Brands
 
-[**See Bugs**][bugs]
+The component auto-detects the card brand based on the card number:
 
-### 💡 Feature requests
+- Visa
+- Mastercard (including 2-series)
+- American Express
+- Discover
+- JCB
+- Diners Club
+- Elo
+- Hipercard
+- Aura
 
-Please file an issue to suggest new features. Vote on feature requests by adding
-a 👍. This helps maintainers prioritize what to work on.
+## Contributing
 
-[**See Feature Requests**][requests]
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Contributors ✨
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Thanks goes to these people ([emoji key][emojis]):
+## License
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://hildor.com.br" target="_blank">
-        <img src="https://avatars2.githubusercontent.com/u/26314970?s=460&u=c15163820da8044436b818e009c83d22ba252fb2&v=4" width="100px;" alt="Hildor Júnior">
-        <br>
-        <sub>
-          <b>Hildor Júnior</b>
-        </sub>
-      </a>
-      <br>
-      <a href="https://github.com/hildorjr/vue-ccard/commits?author=hildorjr" title="Commits">📖</a>
-    </td>
-  </tr>
-</table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors][all-contributors] specification.
-Contributions of any kind welcome!
-
-## LICENSE
-
-MIT
-
-<!-- prettier-ignore-start -->
-[npm]: https://www.npmjs.com
-[node]: https://nodejs.org
-[size-badge]: https://img.shields.io/github/repo-size/hildorjr/vue-ccard?style=flat-square
-[version-badge]: https://img.shields.io/npm/v/vue-ccard.svg?style=flat-square
-[package]: https://www.npmjs.com/package/vue-ccard
-[downloads-badge]: https://img.shields.io/npm/dm/vue-ccard.svg?style=flat-square
-[total-downloads-badge]: https://img.shields.io/npm/dt/vue-ccard.svg?color=red&label=total%20downloads&style=flat-square
-[lgtm-badge]: https://img.shields.io/lgtm/grade/javascript/github/hildorjr/vue-ccard.svg?logo=lgtm&logoWidth=18&style=flat-square
-[lgtm]: https://lgtm.com/projects/g/hildorjr/vue-ccard
-[npmtrends]: http://www.npmtrends.com/vue-ccard
-[license-badge]: https://img.shields.io/npm/l/vue-ccard.svg?style=flat-square
-[license]: https://github.com/hildorjr/vue-ccard/blob/master/LICENSE
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs]: http://makeapullrequest.com
-[emojis]: https://github.com/all-contributors/all-contributors#emoji-key
-[all-contributors]: https://github.com/all-contributors/all-contributors
-[bugs]: https://github.com/hildorjr/vue-ccard/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Acreated-desc+label%3Abug
-[requests]: https://github.com/hildorjr/vue-ccard/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3Aenhancement
-[good-first-issue]: https://github.com/hildorjr/vue-ccard/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3Aenhancement+label%3A%22good+first+issue%22
-<!-- prettier-ignore-end -->
+[MIT](./LICENSE) © [Hildor Junior](https://hildor.dev)
